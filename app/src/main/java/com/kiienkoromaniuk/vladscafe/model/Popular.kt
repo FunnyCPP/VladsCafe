@@ -35,5 +35,8 @@ class Popular {
     @SerializedName("note")
     @Expose
      val note: String? = null
+    @SerializedName("id")
+    @Expose
+    val id: String? = null
 
 }

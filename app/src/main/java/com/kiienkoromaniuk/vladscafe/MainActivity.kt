@@ -1,6 +1,8 @@
 package com.kiienkoromaniuk.vladscafe
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +16,7 @@ import com.kiienkoromaniuk.vladscafe.model.Popular
 import com.kiienkoromaniuk.vladscafe.model.Recommended
 import com.kiienkoromaniuk.vladscafe.retrofit.ApiInterface
 import com.kiienkoromaniuk.vladscafe.retrofit.RetrofitClient
+import io.paperdb.Paper
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,13 +32,14 @@ class MainActivity : AppCompatActivity() {
     var popularAdapter: PopularAdapter? = null
     var recommendedAdapter: RecommendedAdapter? = null
     var allMenuAdapter: AllMenuAdapter? = null
+    private var products = listOf<Allmenu>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        Paper.init(this);
         apiInterface = RetrofitClient.getRetrofitInstance()!!.create<ApiInterface>(ApiInterface::class.java)
-
+        val showcart:ImageView=findViewById(R.id.showCart)
         val call: Call<MutableList<FoodData?>?>? = apiInterface!!.getAllData()
         call!!.enqueue(object : Callback<MutableList<FoodData?>?> {
             override fun onResponse(
@@ -62,7 +66,9 @@ class MainActivity : AppCompatActivity() {
                     .show()
             }
         })
-
+        showcart.setOnClickListener{
+            startActivity(Intent(this, ShopingCartActivity::class.java))
+        }
     }
     private fun getPopularData(popularList: List<Popular>?) {
        var popularRecyclerView = findViewById<RecyclerView>(R.id.popular_recycler)

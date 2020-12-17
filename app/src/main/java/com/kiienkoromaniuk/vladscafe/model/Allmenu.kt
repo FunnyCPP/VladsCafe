@@ -10,29 +10,32 @@ import com.google.gson.annotations.SerializedName
 class Allmenu {
     @SerializedName("name")
     @Expose
-     val name: String? = null
+     var name: String? = null
 
     @SerializedName("imageUrl")
     @Expose
-     val imageUrl: String? = null
+     var imageUrl: String? = null
 
     @SerializedName("rating")
     @Expose
-     val rating: String? = null
+     var rating: String? = null
 
     @SerializedName("deliveryTime")
     @Expose
-     val deliveryTime: String? = null
+     var deliveryTime: String? = null
 
     @SerializedName("deliveryCharges")
     @Expose
-     val deliveryCharges: String? = null
+     var deliveryCharges: String? = null
 
     @SerializedName("price")
     @Expose
-     val price: String? = null
+     var price: String? = null
 
     @SerializedName("note")
     @Expose
-     val note: String? = null
+     var note: String? = null
+    @SerializedName("id")
+    @Expose
+    var id: String? = null
 }
